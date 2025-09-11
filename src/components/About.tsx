@@ -23,16 +23,16 @@ const About = () => {
   
   const activities = [
     {
-      title: "Projet Personnel 1",
-      description: "Description de votre projet personnel ou activité en dehors des cours."
+      title: "Autosoft",
+      description: "Développement d'une plateforme de gestion pour les auto-écoles permettant de digitaliser l'ensemble des processus administratifs, la planification des leçons et le suivi des élèves. Solution complète avec interface responsive et application mobile."
     },
     {
-      title: "Projet Personnel 2",
-      description: "Description d'un autre projet ou activité que vous avez réalisé."
+      title: "Tolarys V2",
+      description: "Conception d'une solution d'audit d'accessibilité numérique permettant d'évaluer la conformité des sites web aux normes RGAA et WCAG. Implémentation d'outils automatiques de détection des problèmes d'accessibilité et génération de rapports détaillés."
     },
     {
-      title: "Activité Extrascolaire",
-      description: "Description d'une activité extrascolaire à laquelle vous participez."
+      title: "Sports",
+      description: "Pratique régulière du basketball en club depuis 8 ans et de la boxe depuis 3 ans. Ces activités m'ont permis de développer mon esprit d'équipe, ma discipline personnelle et ma capacité à gérer le stress dans des situations exigeantes."
     }
   ];
 
@@ -61,13 +61,10 @@ const About = () => {
           >
             <h3 className="text-2xl font-semibold mb-4">Qui suis-je ?</h3>
             <p className="text-lg mb-6">
-              Je suis Mattias Mathevon, passionné par [votre passion]. Je me spécialise dans [votre spécialité] 
-              et j'aime explorer de nouveaux défis en dehors de mes cours.
+              Je suis Mattias Mathevon, passionné par le développement web et l'accessibilité numérique. Je me spécialise dans la création d'applications web modernes et performantes, avec une attention particulière pour l'expérience utilisateur.
             </p>
             <p className="text-lg">
-              Mon objectif est de [votre objectif professionnel ou personnel]. Je suis constamment 
-              à la recherche de nouvelles opportunités pour développer mes compétences et contribuer 
-              à des projets innovants.
+              Mon objectif est de concevoir des solutions numériques qui allient esthétique et fonctionnalité, tout en étant accessibles au plus grand nombre. Je suis constamment à la recherche de nouvelles technologies et méthodologies pour améliorer mes compétences et contribuer à des projets innovants.
             </p>
           </motion.div>
           
