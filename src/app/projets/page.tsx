@@ -3,257 +3,268 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 // Types
 interface Project {
-  id: number;
+  id: string | number;
   title: string;
   description: string;
   image: string;
-  tags: string[];
-  link: string;
+  tags?: string[];
+  technologies?: string[];
+  category?: string;
+  date?: string;
+  url?: string;
+  link?: string;
 }
 
 // Récupérer toutes les données de projets depuis le composant Projects
 const getAllProjects = (): Project[] => {
   // Données des projets
-  const projectRows = [
-    // Première rangée
-    [
-      {
-        id: 1,
-        title: "Tolarys",
-        description: "Accessibilité numérique",
-        image: "/projet/Tolarys.png",
-        tags: ["React", "Tailwind", "Framer Motion"],
-        link: "#"
-      },
-      {
-        id: 2,
-        title: "Tolarys Auto",
-        description: "Accessibilité automobile",
-        image: "/projet/TolarysAuto.png",
-        tags: ["React", "Tailwind", "Next.js"],
-        link: "#"
-      },
-      {
-        id: 3,
-        title: "Prestigear",
-        description: "Location de voitures de luxe",
-        image: "/projet/Prestigear.png",
-        tags: ["React", "Node.js", "MongoDB"],
-        link: "#"
-      },
-      {
-        id: 4,
-        title: "Porsche",
-        description: "Concession automobile",
-        image: "/projet/Porsche.png",
-        tags: ["HTML/CSS", "JavaScript", "PHP"],
-        link: "#"
-      }
-    ],
-    // Deuxième rangée
-    [
-      {
-        id: 5,
-        title: "Afro Burger",
-        description: "Commande en ligne",
-        image: "/projet/AfroBurger.png",
-        tags: ["React", "Firebase", "Stripe"],
-        link: "#"
-      },
-      {
-        id: 6,
-        title: "Odyssée Sucrée",
-        description: "Pâtisserie artisanale",
-        image: "/projet/OdysseeSucree.png",
-        tags: ["Shopify", "Liquid", "JavaScript"],
-        link: "#"
-      },
-      {
-        id: 7,
-        title: "RL Auto",
-        description: "Garage automobile",
-        image: "/projet/Rlauto.png",
-        tags: ["WordPress", "PHP", "CSS"],
-        link: "#"
-      },
-      {
-        id: 8,
-        title: "Auto-école",
-        description: "Réservation de cours",
-        image: "/projet/autoecole.png",
-        tags: ["React", "Node.js", "MySQL"],
-        link: "#"
-      }
-    ],
-    // Troisième rangée
-    [
-      {
-        id: 9,
-        title: "Portfolio Mattias",
-        description: "Portfolio personnel",
-        image: "/projet/PortfolioMattias.png",
-        tags: ["Next.js", "Framer Motion", "Tailwind"],
-        link: "#"
-      },
-      {
-        id: 10,
-        title: "Portfolio Louis",
-        description: "Portfolio créatif",
-        image: "/projet/PortfolioLouis.png",
-        tags: ["React", "Three.js", "GSAP"],
-        link: "#"
-      },
-      {
-        id: 11,
-        title: "Gym Club",
-        description: "Salle de sport",
-        image: "/projet/Gymclub.png",
-        tags: ["React", "Tailwind", "Supabase"],
-        link: "#"
-      },
-      {
-        id: 12,
-        title: "Sport Club",
-        description: "Gestion club sportif",
-        image: "/projet/Sportclub.png",
-        tags: ["Vue.js", "Express", "MongoDB"],
-        link: "#"
-      }
-    ],
-    // Quatrième rangée
-    [
-      {
-        id: 13,
-        title: "JS Barber",
-        description: "Salon de coiffure",
-        image: "/projet/JsBarber.png",
-        tags: ["React", "Node.js", "PostgreSQL"],
-        link: "#"
-      },
-      {
-        id: 14,
-        title: "Eldon Camp",
-        description: "Réservation camping",
-        image: "/projet/EldonCamp.png",
-        tags: ["Next.js", "Prisma", "Tailwind"],
-        link: "#"
-      },
-      {
-        id: 15,
-        title: "BDB Buy",
-        description: "Articles d'occasion",
-        image: "/projet/BBDBuy.png",
-        tags: ["React", "Firebase", "Redux"],
-        link: "#"
-      },
-      {
-        id: 16,
-        title: "AppForge",
-        description: "Applications no-code",
-        image: "/projet/AppForge.png",
-        tags: ["Vue.js", "Node.js", "MongoDB"],
-        link: "#"
-      }
-    ],
-    // Cinquième rangée (projets supplémentaires)
-    [
-      {
-        id: 17,
-        title: "Adam",
-        description: "Site personnel",
-        image: "/projet/Adam.png",
-        tags: ["React", "Tailwind", "Firebase"],
-        link: "#"
-      },
-      {
-        id: 18,
-        title: "Etincelle",
-        description: "Agence créative",
-        image: "/projet/Etincelle.png",
-        tags: ["WordPress", "PHP", "JavaScript"],
-        link: "#"
-      },
-      {
-        id: 19,
-        title: "Laurent",
-        description: "Portfolio artiste",
-        image: "/projet/Laurent.png",
-        tags: ["Next.js", "Three.js", "GSAP"],
-        link: "#"
-      },
-      {
-        id: 20,
-        title: "PLR",
-        description: "Entreprise BTP",
-        image: "/projet/Plr.png",
-        tags: ["HTML/CSS", "JavaScript", "Bootstrap"],
-        link: "#"
-      }
-    ],
-    // Sixième rangée (projets supplémentaires)
-    [
-      {
-        id: 21,
-        title: "Sabard",
-        description: "Boutique en ligne",
-        image: "/projet/Sabard.png",
-        tags: ["Shopify", "Liquid", "CSS"],
-        link: "#"
-      },
-      {
-        id: 22,
-        title: "SmileTex",
-        description: "Textiles personnalisés",
-        image: "/projet/SmileTex.png",
-        tags: ["WooCommerce", "WordPress", "PHP"],
-        link: "#"
-      }
-    ]
+  return [
+    {
+      id: 'projet1',
+      title: 'Maquette de site vitrine pour un restaurant de burgers',
+      category: 'Design',
+      image: '/projet/AfroBurger.png',
+      technologies: ['Figma', 'Illustrator', 'After Effects'],
+      description: 'Maquette de site vitrine pour un restaurant de burgers montalbanais avec réservation en ligne et présentation des menus.',
+      date: '2023-07',
+      url: 'https://www.figma.com/design/gWMeOMOPFMmx4sT9KTgVK0/Afro-Burger-EGR?node-id=0-1&t=dBkkxLjciDcV03L5-1',
+    },
+    {
+      id: 'projet2',
+      title: 'Maquette de site vitrine pour un Camps de vacances basket-ball',
+      category: 'Design',
+      image: '/projet/EldonCamp.png',
+      technologies: ['Figma', 'Illustrator', 'After Effects'],
+      description: 'Maquette de site vitrine pour un Camps de vacances basket-ball avec une présentation des activités et des tarifs.',
+      date: '2023-09',
+      url: 'https://www.figma.com/design/b9iGim4s66YsylVaf8Y1k0/Untitled?node-id=0-1&t=7seVN7EKzJUvzFKO-1',
+    },
+    {
+      id: 'projet3',
+      title: 'Portfolio Professionnel pour développeur web',
+      category: 'Sites Web',
+      image: '/projet/PortfolioMattias.png',
+      technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+      description: 'Portfolio professionnel pour développeur web avec une présentation des projets et des compétences.',
+      date: '2024-09',
+      url: 'https://mattias.netlify.app/'
+    },
+    {
+      id: 'projet4',
+      title: 'Maquette de site vitrine pour une auto-école',
+      category: 'Design',
+      image: '/projet/Adam.png',
+      technologies: ['Figma', 'Illustrator', 'After Effects'],
+      description: 'Maquette de site vitrine pour une auto-école avec une présentation des activités et des tarifs.',
+      date: '2024-09',
+      url: 'https://www.figma.com/design/XBI7Y44Ev9PGD1KThBKLww/Untitled?node-id=0-1&t=Kw4BTr3kDTH8dGFi-1'
+    },
+    {
+      id: 'projet5',
+      title: 'Portfolio d\'un étudiant en Graphisme',
+      category: 'Sites Web',
+      image: '/projet/PortfolioLouis.png',
+      technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+      description: 'Portfolio d\'un étudiant en Graphisme avec une présentation des projets et des compétences.',
+      date: '2024-11',
+      url: 'https://portfoliolouis.netlify.app/'
+    },
+    {
+      id: 'projet6',
+      title: 'Application de mise en relation avec les fournisseur chinois',
+      category: 'Applications Mobiles',
+      image: '/projet/BBDBuy.png',
+      technologies: ['ReactNative', 'Firebase', 'Nodejs'],
+      description: 'Application de mise en relation avec les fournisseur chinois avec une présentation des produits et des tarifs.',
+      date: '2024-12',
+      url: 'https://bbdbuy.netlify.app/'
+    },
+    {
+      id: 'projet7',
+      title: 'Site e-commerce de personnalidations de vêtements',
+      category: 'E-commerce',
+      image: '/projet/SmileTex.png',
+      technologies: ['Nextjs', 'Supabase', 'Stripe'],
+      description: 'Site e-commerce de personnalidations de vêtements avec une présentation des produits et des tarifs ainsi qu\'un module de personnalisation.',
+      date: '2025-03',
+      url: 'https://smiletx.vercel.app/'
+    },
+    {
+      id: 'projet8',
+      title: 'Notre site Tolarys avec une vrai DA',
+      category: 'Sites Web',
+      image: '/projet/Tolarys.png',
+      technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
+      description: 'Notre site web a été réaliser en collaboration avec un artiste afin de faire un site avec une DA tournée autour de toulouse.',
+      date: '2025-02',
+      url: 'https://www.tolarys-toulouse.fr/'
+    },
+    {
+      id: 'projet9',
+      title: 'Notre SaaS de gestion des auto-écoles',
+      category: 'SaaS',
+      image: '/projet/TolarysAuto.png',
+      technologies: ['Nextjs', 'Supabase', 'Framer Motion'],
+      description: 'Notre SaaS de gestion des auto-écoles avec une gestion des plainng entre moniteurs, gestion du parc Auto et une gestion des payments.',
+      date: '2025-01',
+      url: 'https://tolarys-auto.vercel.app/'
+    },
+    {
+      id: 'projet10',
+      title: 'Site web pour AppForge',
+      category: 'Sites Web',
+      image: '/projet/AppForge.png',
+      technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
+      description: 'Site web réaliser avec une estimation du prix et un portfolio modulable.',
+      date: '2024-10',
+      url: 'https://appforge-eight.vercel.app/'
+    },
+    {
+      id: 'projet11',
+      title: 'Site E-commerce de vente de véhicules japonais',
+      category: 'E-commerce',
+      image: '/projet/Prestigear.png',
+      technologies: ['Prestashop', 'PHP', 'React', 'Stripe'],
+      description: 'Site E-commerce de vente de véhicules japonais avec une présentation des produits et des tarifs ainsi qu\'un module de personnalisation.',
+      date: '2025-03',
+      url: 'https://prestigear.vercel.app/'
+    },
+    {
+      id: 'projet12',
+      title: 'Site vitrine pour Auto-Ecole',
+      category: 'Sites Web',
+      image: '/projet/autoecole.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un auto-école avec un espace éléve.',
+      date: '2025-03',
+      url: 'https://auto-ashen.vercel.app/',
+    },
+    {
+      id: 'projet13',
+      title: 'Site vitrine pour JsBarber',
+      category: 'Sites Web',
+      image: '/projet/JsBarber.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un barbier avec module de réservation.',
+      date: '2025-04',
+      url: 'https://jsbarber.vercel.app/',
+    },
+    {
+      id: 'projet14',
+      title: 'Site vitrine pour Etincelle Coworking',
+      category: 'Sites Web',
+      image: '/projet/Etincelle.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un coworking avec module de réservation.',
+      date: '2025-05',
+      url: 'https://etincelle-coworking.vercel.app/',
+    },
+    {
+      id: 'projet15',
+      title: 'Site vitrine pour Sabard Bâtiment',
+      category: 'Sites Web',
+      image: '/projet/Sabard.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un bâtiment avec module de réservation.',
+      date: '2025-04',
+      url: 'https://sabard.vercel.app/',
+    },
+    {
+      id: 'projet16',
+      title: 'Site vitrine pour Laurent SAS MAHIEUX',
+      category: 'Sites Web',
+      image: '/projet/Laurent.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour une entreprise de paysage avec module de visualisation avant/après.',
+      date: '2025-05',
+      url: 'https://laurent-sas-mahieux.vercel.app/',
+    },
+    {
+      id: 'projet17',
+      title: 'Site vitrine pour une salle de sport',
+      category: 'Sites Web',
+      image: '/projet/Gymclub.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour une salle de sport avec module de réservation.',
+      date: '2025-05',
+      url: 'https://gymclub45.vercel.app/',
+    },
+    {
+      id: 'projet18',
+      title: 'Site vitrine pour Sport Club à Orléans',
+      category: 'Sites Web',
+      image: '/projet/Sportclub.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un club sportif avec module de réservation.',
+      date: '2025-05',
+      url: 'https://sportclub45.vercel.app/',
+    },
+    {
+      id: 'projet19',
+      title: 'Site vitrine pour Porsche Almeras',
+      category: 'Sites Web',
+      image: '/projet/Porsche.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour un revendeur de porsche et préparation des véhicules.',
+      date: '2025-05',
+      url: 'https://porschealmeras.vercel.app/',
+    },
+    {
+      id: 'projet20',
+      title: 'Site E-commerce pour un concessionnaire de voitures',
+      category: 'E-commerce',
+      image: '/projet/Rlauto.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site E-commerce pour un concessionnaire de voitures.',
+      date: '2025-05',
+      url: 'https://rl-auto-maquette.vercel.app/fr',
+    },
+    {
+      id: 'projet21',
+      title: 'Site vitrine pour une entreprise de location de Remorque',
+      category: 'Sites Web',
+      image: '/projet/Plr.png',
+      technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+      description: 'Site vitrine pour une entreprise de location de Remorque.',
+      date: '2025-05',
+      url: 'https://plr-orleans.vercel.app/',
+    },
   ];
-
-  // Aplatir les rangées en une seule liste
-  return projectRows.flat();
 };
 
 // Catégories pour le filtrage
 const categories = [
   "Tous",
-  "Web",
-  "Mobile",
+  "Sites Web",
+  "Applications Mobiles",
   "Design",
-  "Automobile",
-  "E-commerce",
-  "Portfolio"
+  "SaaS",
+  "E-commerce"
 ];
 
 // Technologies pour le filtrage
 const allTechnologies = [
-  "React", 
+  "Nextjs",
   "Next.js", 
-  "Vue.js", 
-  "Node.js", 
-  "MongoDB", 
+  "React", 
+  "ReactNative",
+  "Tailwind CSS", 
+  "Framer Motion",
+  "Framer",
   "Firebase", 
-  "Tailwind", 
-  "Three.js", 
-  "PHP", 
-  "WordPress",
   "Supabase",
-  "MySQL",
-  "PostgreSQL",
-  "Express",
-  "Redux",
-  "Prisma",
-  "GSAP",
-  "Liquid",
   "Stripe",
-  "HTML/CSS",
-  "JavaScript",
-  "Bootstrap",
-  "WooCommerce"
+  "Nodejs",
+  "PHP",
+  "Prestashop",
+  "Figma", 
+  "Illustrator", 
+  "After Effects"
 ];
 
 export default function ProjectsPage() {
@@ -263,6 +274,8 @@ export default function ProjectsPage() {
   const [selectedTech, setSelectedTech] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"default" | "asc" | "desc">("default");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Charger les projets au chargement de la page
   useEffect(() => {
@@ -277,51 +290,23 @@ export default function ProjectsPage() {
 
     // Filtrer par catégorie
     if (selectedCategory !== "Tous") {
-      // Logique de filtrage par catégorie
-      // Par exemple, si la catégorie est "Web", filtrer les projets web
-      switch (selectedCategory) {
-        case "Web":
-          result = result.filter(p => 
-            p.tags.some(tag => ["React", "Next.js", "Vue.js", "HTML/CSS"].includes(tag))
-          );
-          break;
-        case "Mobile":
-          result = result.filter(p => 
-            p.description.toLowerCase().includes("mobile") || 
-            p.tags.some(tag => ["React Native"].includes(tag))
-          );
-          break;
-        case "Design":
-          result = result.filter(p => 
-            p.tags.some(tag => ["Framer Motion", "Three.js", "GSAP"].includes(tag))
-          );
-          break;
-        case "Automobile":
-          result = result.filter(p => 
-            p.description.toLowerCase().includes("auto") || 
-            p.title.toLowerCase().includes("auto") ||
-            ["Porsche", "RL Auto", "Tolarys Auto", "Prestigear"].includes(p.title)
-          );
-          break;
-        case "E-commerce":
-          result = result.filter(p => 
-            p.tags.some(tag => ["Shopify", "Stripe"].includes(tag)) ||
-            ["Afro Burger", "Odyssée Sucrée", "BDB Buy"].includes(p.title)
-          );
-          break;
-        case "Portfolio":
-          result = result.filter(p => 
-            p.title.toLowerCase().includes("portfolio")
-          );
-          break;
-      }
+      result = result.filter(p => p.category === selectedCategory);
     }
 
     // Filtrer par technologies
     if (selectedTech.length > 0) {
-      result = result.filter(project => 
-        selectedTech.some(tech => project.tags.includes(tech))
-      );
+      result = result.filter(project => {
+        // Vérifier si le projet a des technologies
+        if (project.technologies) {
+          return selectedTech.some(tech => project.technologies!.includes(tech));
+        }
+        // Sinon vérifier les tags si disponibles
+        if (project.tags) {
+          return selectedTech.some(tech => project.tags!.includes(tech));
+        }
+        // Si ni technologies ni tags, ne pas inclure ce projet
+        return false;
+      });
     }
 
     // Filtrer par recherche
@@ -343,8 +328,13 @@ export default function ProjectsPage() {
         result.sort((a, b) => b.title.localeCompare(a.title));
         break;
       default:
-        // Garder l'ordre par défaut (par ID)
-        result.sort((a, b) => a.id - b.id);
+        // Garder l'ordre par défaut (par id)
+        result.sort((a, b) => {
+          if (typeof a.id === 'number' && typeof b.id === 'number') {
+            return a.id - b.id;
+          }
+          return String(a.id).localeCompare(String(b.id));
+        });
     }
 
     setFilteredProjects(result);
@@ -360,7 +350,8 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="min-h-screen py-20 px-4 md:px-8">
+    <main className="min-h-screen">
+      <Header />
       <div className="container mx-auto">
         <div className="mb-12 text-center">
           <motion.h1 
@@ -467,10 +458,14 @@ export default function ProjectsPage() {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * (index % 8) }}
+              onClick={() => {
+                setSelectedProject(project);
+                setIsModalOpen(true);
+              }}
             >
               <div className="h-48 overflow-hidden">
                 <img 
@@ -481,10 +476,17 @@ export default function ProjectsPage() {
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold text-black mb-1">{project.title}</h3>
-                <p className="text-sm text-gray-600 mb-3">{project.description}</p>
+                <p className="text-sm text-gray-600 mb-3">{project.description.substring(0, 100)}...</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, i) => (
+                  {project.technologies ? project.technologies.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-600"
+                    >
+                      {tech}
+                    </span>
+                  )) : project.tags?.map((tag, i) => (
                     <span
                       key={i}
                       className="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-600"
@@ -494,14 +496,11 @@ export default function ProjectsPage() {
                   ))}
                 </div>
                 
-                <a 
-                  href={project.link} 
+                <button 
                   className="inline-block px-4 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
-                  Voir le projet
-                </a>
+                  Voir les détails
+                </button>
               </div>
             </motion.div>
           ))}
@@ -539,6 +538,85 @@ export default function ProjectsPage() {
           </Link>
         </div>
       </div>
+      <Footer />
+
+      {/* Modal pour afficher les détails du projet */}
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 backdrop-blur-sm bg-white/30 flex items-center justify-center z-50 p-4">
+          <motion.div 
+            className="bg-white rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="relative">
+              <div className="h-64 md:h-80 overflow-hidden">
+                <img 
+                  src={selectedProject.image} 
+                  alt={selectedProject.title} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <button 
+                className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <h2 className="text-2xl font-bold text-black">{selectedProject.title}</h2>
+                {selectedProject.category && <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">{selectedProject.category}</span>}
+              </div>
+              
+              <p className="text-gray-700 mb-6">{selectedProject.description}</p>
+              
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Technologies utilisées</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.technologies ? selectedProject.technologies.map((tech, i) => (
+                    <span 
+                      key={i} 
+                      className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700"
+                    >
+                      {tech}
+                    </span>
+                  )) : selectedProject.tags?.map((tag, i) => (
+                    <span 
+                      key={i} 
+                      className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              {selectedProject.date && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold mb-2">Date de réalisation</h3>
+                  <p className="text-gray-700">{selectedProject.date}</p>
+                </div>
+              )}
+              
+              <div className="flex justify-end">
+                <a 
+                  href={selectedProject.url || selectedProject.link || '#'} 
+                  className="inline-block px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visiter le projet
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </main>
   );
 }
