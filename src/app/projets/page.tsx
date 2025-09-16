@@ -352,7 +352,7 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen">
       <Header />
-      <div className="container mx-auto">
+      <div className="container mx-auto pt-24">
         <div className="mb-12 text-center">
           <motion.h1 
             className="text-4xl md:text-5xl font-bold mb-4 text-black"

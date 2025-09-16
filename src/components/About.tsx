@@ -77,7 +77,7 @@ const About = () => {
           >
             <div className="aspect-square rounded-full overflow-hidden gradient-border">
               <img 
-                src="/image/pp.jpeg" 
+                src="/image/pp1.PNG" 
                 alt="Mattias Mathevon" 
                 className="w-full h-full object-cover"
               />

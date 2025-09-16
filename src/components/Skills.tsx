@@ -18,19 +18,19 @@ const Skills = () => {
     {
       category: "Développement Frontend",
       items: [
-        { name: "HTML/CSS", level: 90 },
-        { name: "JavaScript", level: 85 },
-        { name: "React", level: 80 },
-        { name: "Next.js", level: 75 }
+        { name: "Next.js", level: 90 },
+        { name: "React", level: 85 },
+        { name: "Html/Css", level: 80 },
+        { name: "Typescript", level: 75 }
       ]
     },
     {
       category: "Développement Backend",
       items: [
-        { name: "Node.js", level: 70 },
-        { name: "Express", level: 65 },
-        { name: "MongoDB", level: 60 },
-        { name: "SQL", level: 75 }
+        { name: "Supabase", level: 85 },
+        { name: "Node.js", level: 80 },
+        { name: "SQL", level: 70 },
+        { name: "PHP", level: 50 }
       ]
     },
     {

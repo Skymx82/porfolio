@@ -21,12 +21,12 @@ const Header = () => {
   }, [scrolled]);
 
   const navItems = [
-    { name: 'Accueil', href: '#home' },
-    { name: 'À propos', href: '#about' },
-    { name: 'Expériences', href: '#experience' },
-    { name: 'Projets', href: '#projects' },
-    { name: 'Compétences', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Accueil', href: '/#home' },
+    { name: 'À propos', href: '/#about' },
+    { name: 'Expériences', href: '/#experience' },
+    { name: 'Projets', href: '/projets' },
+    { name: 'Compétences', href: '/#skills' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (

@@ -31,18 +31,6 @@ const Footer = () => {
             </p>
           </motion.div>
         </div>
-        
-        <motion.div 
-          className="mt-6 pt-6 border-t border-gray-200 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <p className="text-sm text-gray-500">
-            Conçu et développé avec <span className="text-red-500">❤</span> en utilisant Next.js, Tailwind CSS et Framer Motion
-          </p>
-        </motion.div>
       </div>
     </footer>
   );
