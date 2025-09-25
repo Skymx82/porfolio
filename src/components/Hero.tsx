@@ -264,12 +264,12 @@ const Hero = () => {
             ref={subtitleRef}
             className="text-xl md:text-2xl mb-8 max-w-2xl"
           >
-            Développeur passionné & créatif
+            Fondateur de Tolarys & AutoSoft
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a 
               ref={buttonRef}
-              href="#projects" 
+              href="#main-projects" 
               className="px-8 py-3 rounded-full gradient-bg text-white font-medium transition-transform hover:scale-105 active:scale-95"
             >
               Voir mes projets

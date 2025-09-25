@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Projects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -15,7 +16,9 @@ const Projects = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100]);
   
-  // Données des projets organisées en rangées pour le défilement
+  // Les projets principaux ont été déplacés dans le composant MainProjects.tsx
+  
+  // Données des projets d'agence organisées en rangées pour le défilement
   const projectRows = [
     // Première rangée
     [
@@ -172,12 +175,35 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Mes Projets
+          Autres Projets
         </motion.h2>
         
-        {/* Carrousel de projets - 3 lignes avec défilement automatique */}
-        <div className="relative -mx-4 overflow-hidden">
-          {projectRows.map((row, rowIndex) => (
+        {/* Projets d'agence - Carrousel */}
+        <motion.div
+          className="mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className="text-center mb-10">
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 text-black inline-block relative">
+              Projets d'Agence
+              <motion.div 
+                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 to-gray-600"
+                initial={{ width: 0 }}
+                whileInView={{ width: '100%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              />
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Découvrez les projets réalisés pour mes clients via mon agence de communication.
+            </p>
+          </div>
+          
+          <div className="relative -mx-4 overflow-hidden">
+            {projectRows.map((row, rowIndex) => (
             <motion.div
               key={`row-${rowIndex}`}
               className="mb-3 relative"
@@ -283,7 +309,8 @@ const Projects = () => {
           </motion.a>
         </motion.div>
       </motion.div>
-    </section>
+    </motion.div>
+  </section>
   );
 };
 

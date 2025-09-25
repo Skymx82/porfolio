@@ -21,20 +21,9 @@ const About = () => {
     visible: { opacity: 1, y: 0 }
   };
   
-  const activities = [
-    {
-      title: "Autosoft",
-      description: "Développement d'une plateforme de gestion pour les auto-écoles permettant de digitaliser l'ensemble des processus administratifs, la planification des leçons et le suivi des élèves. Solution complète avec interface responsive et application mobile."
-    },
-    {
-      title: "Tolarys V2",
-      description: "Conception d'une solution d'audit d'accessibilité numérique permettant d'évaluer la conformité des sites web aux normes RGAA et WCAG. Implémentation d'outils automatiques de détection des problèmes d'accessibilité et génération de rapports détaillés."
-    },
-    {
-      title: "Sports",
-      description: "Pratique régulière du basketball en club depuis 8 ans et de la boxe depuis 3 ans. Ces activités m'ont permis de développer mon esprit d'équipe, ma discipline personnelle et ma capacité à gérer le stress dans des situations exigeantes."
-    }
-  ];
+  const sportBackground = "J'ai eu un parcours sportif riche dans le basketball, ayant évolué à haut niveau en National 3 avec JS Cugnaux. Avant cela, j'ai joué en U21 R1 à JS Cugnaux, en U21 R2 au Vazerac Sud Quercy Basket, et en U18 Occitanie au Montauban Basket Club. Aujourd'hui, je pratique la boxe anglaise au Boxing Center, ce qui me permet de maintenir une discipline rigoureuse et de développer ma résistance mentale.";
+  
+  const futureProjects = "Pour l'avenir, j'ambitionne d'intégrer une école d'ingénieur tout en continuant à développer mon entreprise Tolarys. Je prépare également le lancement de ma deuxième entreprise, AutoSoft, dont la version bêta est prévue pour fin octobre/début novembre. Ces projets entrepreneuriaux me permettent d'appliquer concrètement mes compétences techniques tout en développant mon expérience dans la gestion d'entreprise.";
 
   return (
     <section id="about" className="py-20 min-h-screen flex items-center" ref={sectionRef}>
@@ -119,29 +108,43 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          Mes Activités En Dehors Des Cours
+          Parcours Sportif et Projets Futurs
         </motion.h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {activities.map((activity, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              transition={{ 
-                duration: 0.6,
-                delay: i * 0.1,
-                ease: "easeOut"
-              }}
-              viewport={{ once: true }}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <h4 className="text-xl font-semibold mb-3 text-black">{activity.title}</h4>
-              <p>{activity.description}</p>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <h4 className="text-xl font-semibold mb-3 text-black">Mon Parcours Sportif</h4>
+            <p className="text-gray-700 leading-relaxed">{sportBackground}</p>
+            <div className="mt-4 flex gap-2">
+              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Basketball</span>
+              <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">Boxe Anglaise</span>
+              <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">National 3</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <h4 className="text-xl font-semibold mb-3 text-black">Mes Projets Futurs</h4>
+            <p className="text-gray-700 leading-relaxed">{futureProjects}</p>
+            <div className="mt-4 flex gap-2">
+              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Tolarys</span>
+              <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">AutoSoft</span>
+              <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">École d'Ingénieur</span>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

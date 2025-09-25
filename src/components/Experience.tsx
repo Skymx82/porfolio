@@ -26,7 +26,7 @@ const Experience = () => {
     },
     {
       id: 2,
-      role: "Développeur",
+      role: "ERASMUS Développeur",
       company: "Voltier Electronics",
       period: "2024 (6 semaines)",
       location: "Saint-Jacques-de-Compostelle, Espagne",
