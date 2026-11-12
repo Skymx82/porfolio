@@ -60,3 +60,27 @@ body {
   background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
   z-index: -1;
 }
+
+/* Ancres : le contenu ne passe pas sous l'en-tête fixe */
+section[id],
+article[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Moins d'animations quand le système le demande (transitions et animations CSS) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
