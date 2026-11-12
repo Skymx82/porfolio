@@ -28,7 +28,6 @@ export const profile = {
   initials: "MM",
   role: "Développeur full-stack",
   email: "mattias.mathevon@gmail.com",
-  phone: "+33 6 79 33 68 12",
   location: "Toulouse, France",
   photo: "/image/pp1.PNG",
   cvUrl: "/CV.pdf",
