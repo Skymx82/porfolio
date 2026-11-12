@@ -1,20 +1,10 @@
 "use client"
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { about, profile } from '@/data/profile';
 
 const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100]);
-  
   // Simplifier les variants pour éviter les erreurs de type
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -26,11 +16,8 @@ const About = () => {
   const futureProjects = "Pour l'avenir, j'ambitionne d'intégrer une école d'ingénieur tout en continuant à développer mon entreprise Tolarys. Je prépare également le lancement de ma deuxième entreprise, AutoSoft, dont la version bêta est prévue pour fin octobre/début novembre. Ces projets entrepreneuriaux me permettent d'appliquer concrètement mes compétences techniques tout en développant mon expérience dans la gestion d'entreprise.";
 
   return (
-    <section id="about" className="py-20 min-h-screen flex items-center" ref={sectionRef}>
-      <motion.div 
-        className="container mx-auto px-4"
-        style={{ opacity, scale, y }}
-      >
+    <section id="about" className="py-20">
+      <div className="container mx-auto px-4">
         <motion.h2 
           className="text-4xl md:text-5xl font-bold mb-8 text-center text-black"
           initial={{ opacity: 0, y: -20 }}
@@ -38,42 +25,43 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          À Propos
+          À propos
         </motion.h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-6 text-lg leading-relaxed text-gray-800"
           >
-            <h3 className="text-2xl font-semibold mb-4">Qui suis-je ?</h3>
-            <p className="text-lg mb-6">
-              Je suis Mattias Mathevon, passionné par le développement web et l'accessibilité numérique. Je me spécialise dans la création d'applications web modernes et performantes, avec une attention particulière pour l'expérience utilisateur.
-            </p>
-            <p className="text-lg">
-              Mon objectif est de concevoir des solutions numériques qui allient esthétique et fonctionnalité, tout en étant accessibles au plus grand nombre. Je suis constamment à la recherche de nouvelles technologies et méthodologies pour améliorer mes compétences et contribuer à des projets innovants.
-            </p>
+            {about.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
           </motion.div>
           
           <motion.div
-            className="relative"
+            className="relative mx-auto w-full max-w-xs md:max-w-sm"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="aspect-square rounded-full overflow-hidden gradient-border">
-              <img 
-                src="/image/pp1.PNG" 
-                alt="Mattias Mathevon" 
+              <Image
+                src={profile.photo}
+                alt={`Portrait de ${profile.name}`}
+                width={1024}
+                height={1024}
+                sizes="(min-width: 768px) 384px, 320px"
                 className="w-full h-full object-cover"
               />
             </div>
             
             <motion.div 
-              className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full gradient-bg"
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 -z-10 w-32 h-32 rounded-full gradient-bg"
               animate={{ 
                 scale: [1, 1.1, 1],
                 rotate: [0, 5, 0, -5, 0]
@@ -86,7 +74,8 @@ const About = () => {
             />
             
             <motion.div 
-              className="absolute -top-4 -left-4 w-24 h-24 rounded-full gradient-bg opacity-70"
+              aria-hidden="true"
+              className="absolute -top-4 -left-4 -z-10 w-24 h-24 rounded-full gradient-bg opacity-70"
               animate={{ 
                 scale: [1, 1.2, 1],
                 rotate: [0, -5, 0, 5, 0]
@@ -146,7 +135,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
