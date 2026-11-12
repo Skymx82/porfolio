@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { education, experiences } from '@/data/profile';
 import { ExternalLinkIcon } from './icons';
-import Todo from './Todo';
+import Todo, { SHOW_TODOS } from './Todo';
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -41,7 +41,7 @@ const Experience = () => {
 
                   <p className="mb-4 text-gray-700 leading-relaxed">{exp.description}</p>
 
-                  {exp.todo && (
+                  {exp.todo && SHOW_TODOS && (
                     <p className="mb-4">
                       <Todo>{exp.todo}</Todo>
                     </p>

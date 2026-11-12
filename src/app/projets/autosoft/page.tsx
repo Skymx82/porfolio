@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Todo from "@/components/Todo";
+import Todo, { SHOW_TODOS } from "@/components/Todo";
 import { ExternalLinkIcon, MailIcon } from "@/components/icons";
 import { autosoft } from "@/data/autosoft";
 import { autosoftTimeSpent, mailtoHref } from "@/data/profile";
@@ -35,9 +35,11 @@ export default function AutoSoftCaseStudy() {
           <p className="text-sm font-semibold uppercase tracking-widest text-gray-700">Étude de cas</p>
           <h1 className="mt-2 text-5xl md:text-6xl font-bold tracking-tight text-black">{autosoft.name}</h1>
           <p className="mt-4 text-xl text-gray-800">{autosoft.tagline}</p>
-          <p className="mt-3 text-gray-700">
-            {autosoftTimeSpent ?? <Todo>temps consacré aujourd&apos;hui à AutoSoft</Todo>}
-          </p>
+          {(autosoftTimeSpent || SHOW_TODOS) && (
+            <p className="mt-3 text-gray-700">
+              {autosoftTimeSpent ?? <Todo>temps consacré aujourd&apos;hui à AutoSoft</Todo>}
+            </p>
+          )}
           <ul className="mt-6 flex flex-wrap gap-2" aria-label="Stack">
             {autosoft.stack.map((tech) => (
               <li key={tech} className="rounded-full bg-gray-900 px-3 py-1 text-sm font-medium text-white">
@@ -90,10 +92,12 @@ export default function AutoSoftCaseStudy() {
               <figcaption className="mt-2 text-center text-sm text-gray-700">L&apos;espace moniteur sur téléphone.</figcaption>
             </figure>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <CapturePlaceholder>signature d&apos;un contrat sur tablette</CapturePlaceholder>
-            <CapturePlaceholder>encaissements et caisse d&apos;une école</CapturePlaceholder>
-          </div>
+          {SHOW_TODOS && (
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <CapturePlaceholder>signature d&apos;un contrat sur tablette</CapturePlaceholder>
+              <CapturePlaceholder>encaissements et caisse d&apos;une école</CapturePlaceholder>
+            </div>
+          )}
         </section>
 
         <section className="mt-16" aria-labelledby="architecture">

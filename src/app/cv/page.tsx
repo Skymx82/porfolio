@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PrintButton from "@/components/PrintButton";
-import Todo from "@/components/Todo";
+import Todo, { SHOW_TODOS } from "@/components/Todo";
 import {
   about,
   drivingLicense,
@@ -91,7 +91,7 @@ export default function CvPage() {
                     {[exp.duration, exp.location].filter(Boolean).join(" · ")}
                   </p>
                   <p className="mt-0.5 text-gray-800">{exp.description}</p>
-                  {exp.todo && (
+                  {exp.todo && SHOW_TODOS && (
                     <p className="mt-0.5">
                       <Todo>{exp.todo}</Todo>
                     </p>
