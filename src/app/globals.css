@@ -85,3 +85,31 @@ article[id] {
     scroll-behavior: auto !important;
   }
 }
+
+/* CV imprimable (/cv) : une feuille A4 à l'écran comme à l'impression */
+.cv-sheet {
+  box-sizing: border-box;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 12mm 13mm;
+}
+
+@media screen and (max-width: 840px) {
+  .cv-sheet {
+    width: auto;
+    min-height: 0;
+    margin: 0 16px;
+    padding: 24px 20px;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  .cv-sheet {
+    min-height: 0;
+  }
+}

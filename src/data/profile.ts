@@ -34,7 +34,7 @@ export const profile = {
   email: "mattias.mathevon@gmail.com",
   location: "Toulouse, France",
   photo: "/image/pp1.PNG",
-  cvUrl: "/CV.pdf",
+  cvUrl: "/CV-Mattias-Mathevon.pdf",
   links: {
     linkedin: "https://www.linkedin.com/in/mattias-mathevon/",
     github: "https://github.com/Skymx82",
@@ -82,7 +82,18 @@ export const sport = {
     "Membre d'AMTC, le BDE de la MIAGE",
   ],
   tags: ["Basketball", "National 3", "Coaching", "HYROX"],
+  // Résumé d'une ligne pour le CV
+  cvLine: "Basketball : National 3 avec JS Cugnaux",
 } as const;
+
+// Repris du CV de Mattias (septembre 2026).
+export const languages = [
+  "Français : langue maternelle",
+  "Anglais : documentation technique et échanges simples",
+  "Espagnol : notions, deux mois en immersion",
+] as const;
+
+export const drivingLicense = "Permis B";
 
 export const experiences: Experience[] = [
   {
