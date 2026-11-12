@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import Link from 'next/link';
 import MorphingSVG from './svg/MorphingSVG';
 import { hero, profile } from '@/data/profile';
 import { DownloadIcon, GitHubIcon, LinkedInIcon } from './icons';
@@ -86,12 +87,12 @@ const Hero = () => {
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-700 text-balance">{hero.subtitle.join(" · ")}</p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#autosoft"
+            <Link
+              href="/projets/autosoft"
               className="px-7 py-3 rounded-full gradient-bg text-white font-semibold shadow-md transition-transform hover:scale-105 active:scale-95"
             >
               Voir AutoSoft
-            </a>
+            </Link>
             <a
               href="#contact"
               className="px-7 py-3 rounded-full bg-white border-2 border-gray-900 text-gray-900 font-semibold transition-transform hover:scale-105 active:scale-95"

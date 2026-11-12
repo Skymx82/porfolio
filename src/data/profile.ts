@@ -23,6 +23,10 @@ export type Education = {
   details?: string;
 };
 
+// Phrase sur le temps consacré aujourd'hui à AutoSoft (écrite sur LinkedIn, à recopier ici).
+// Tant qu'elle vaut null, le site affiche un repère [À COMPLÉTER].
+export const autosoftTimeSpent: string | null = null;
+
 export const profile = {
   name: "Mattias Mathevon",
   initials: "MM",
@@ -88,10 +92,11 @@ export const experiences: Experience[] = [
     period: "Depuis septembre 2025",
     location: "Toulouse",
     description:
-      "Logiciel de gestion (ERP) pour les auto-écoles : élèves, planning des moniteurs, contrats, encaissements, caisse, dossiers administratifs. Données isolées entre chaque école au niveau de la base (Row Level Security), plus de 2 600 tests automatisés et une intégration continue qui bloque toute version en échec. En production, utilisé par deux auto-écoles en conditions réelles.",
+      "Logiciel de gestion (ERP) pour les auto-écoles : élèves, planning des moniteurs, contrats, encaissements, caisse, dossiers administratifs. Données isolées entre chaque école au niveau de la base (Row Level Security), plus de 2 600 tests automatisés et une intégration continue qui bloque toute version en échec. En production, utilisé par deux auto-écoles en conditions réelles." +
+      (autosoftTimeSpent ? ` ${autosoftTimeSpent}` : ""),
     technologies: ["Next.js", "TypeScript", "Supabase (PostgreSQL)", "Tailwind CSS", "shadcn/ui"],
     link: { label: "auto-soft.fr", href: "https://www.auto-soft.fr" },
-    todo: "temps consacré aujourd'hui à AutoSoft",
+    todo: autosoftTimeSpent ? undefined : "temps consacré aujourd'hui à AutoSoft",
   },
   {
     id: "odyssee-sucree",
