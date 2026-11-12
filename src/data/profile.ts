@@ -138,13 +138,14 @@ export const experiences: Experience[] = [
       "Scripts C# qui automatisent des tâches internes ; script serveur qui vérifie l'état du DNS et envoie un rapport d'audit par e-mail ; câblage de sondes pour des essais sur béton.",
     technologies: ["C#", "Scripting", "Administration serveur"],
   },
-  // Absente de LinkedIn : en attente de décision (question n° 4), texte d'origine inchangé.
+  // Absente de LinkedIn, conservée à la demande de Mattias (nom et dates : son CV de 2026).
   {
-    id: "maf-agrorobotic",
-    company: "Maf Agrorobotic",
+    id: "maf-roda-agrobotic",
+    company: "MAF Roda Agrobotic",
     role: "Technicien",
-    period: "2022 (8 semaines)",
-    location: "Montauban, France",
+    period: "Novembre à décembre 2022",
+    duration: "8 semaines",
+    location: "Montauban",
     description:
       "Monter et câbler des unités centrales. Configurer des serveurs et des PCs. Faire des connexions inter-serveur. Soudure sur carte mère.",
     technologies: ["Assemblage PC", "Configuration serveur", "Soudure", "Réseaux"],
