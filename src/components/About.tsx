@@ -1,36 +1,20 @@
 "use client"
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { about, lookingFor, profile, sport } from '@/data/profile';
 
 const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100]);
-  
-  // Simplifier les variants pour éviter les erreurs de type
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
-  
-  const sportBackground = "J'ai eu un parcours sportif riche dans le basketball, ayant évolué à haut niveau en National 3 avec JS Cugnaux. Avant cela, j'ai joué en U21 R1 à JS Cugnaux, en U21 R2 au Vazerac Sud Quercy Basket, et en U18 Occitanie au Montauban Basket Club. Aujourd'hui, je pratique la boxe anglaise au Boxing Center, ce qui me permet de maintenir une discipline rigoureuse et de développer ma résistance mentale.";
-  
-  const futureProjects = "Pour l'avenir, j'ambitionne d'intégrer une école d'ingénieur tout en continuant à développer mon entreprise Tolarys. Je prépare également le lancement de ma deuxième entreprise, AutoSoft, dont la version bêta est prévue pour fin octobre/début novembre. Ces projets entrepreneuriaux me permettent d'appliquer concrètement mes compétences techniques tout en développant mon expérience dans la gestion d'entreprise.";
+
+  const tagColors = ['bg-blue-100 text-blue-800', 'bg-purple-100 text-purple-800', 'bg-red-100 text-red-800', 'bg-amber-100 text-amber-900'];
 
   return (
-    <section id="about" className="py-20 min-h-screen flex items-center" ref={sectionRef}>
-      <motion.div 
-        className="container mx-auto px-4"
-        style={{ opacity, scale, y }}
-      >
+    <section id="about" className="py-20">
+      <div className="container mx-auto px-4">
         <motion.h2 
           className="text-4xl md:text-5xl font-bold mb-8 text-center text-black"
           initial={{ opacity: 0, y: -20 }}
@@ -38,42 +22,43 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          À Propos
+          À propos
         </motion.h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-6 text-lg leading-relaxed text-gray-800"
           >
-            <h3 className="text-2xl font-semibold mb-4">Qui suis-je ?</h3>
-            <p className="text-lg mb-6">
-              Je suis Mattias Mathevon, passionné par le développement web et l'accessibilité numérique. Je me spécialise dans la création d'applications web modernes et performantes, avec une attention particulière pour l'expérience utilisateur.
-            </p>
-            <p className="text-lg">
-              Mon objectif est de concevoir des solutions numériques qui allient esthétique et fonctionnalité, tout en étant accessibles au plus grand nombre. Je suis constamment à la recherche de nouvelles technologies et méthodologies pour améliorer mes compétences et contribuer à des projets innovants.
-            </p>
+            {about.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
           </motion.div>
           
           <motion.div
-            className="relative"
+            className="relative mx-auto w-full max-w-xs md:max-w-sm"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="aspect-square rounded-full overflow-hidden gradient-border">
-              <img 
-                src="/image/pp1.PNG" 
-                alt="Mattias Mathevon" 
+              <Image
+                src={profile.photo}
+                alt={`Portrait de ${profile.name}`}
+                width={1024}
+                height={1024}
+                sizes="(min-width: 768px) 384px, 320px"
                 className="w-full h-full object-cover"
               />
             </div>
             
             <motion.div 
-              className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full gradient-bg"
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 -z-10 w-32 h-32 rounded-full gradient-bg"
               animate={{ 
                 scale: [1, 1.1, 1],
                 rotate: [0, 5, 0, -5, 0]
@@ -86,7 +71,8 @@ const About = () => {
             />
             
             <motion.div 
-              className="absolute -top-4 -left-4 w-24 h-24 rounded-full gradient-bg opacity-70"
+              aria-hidden="true"
+              className="absolute -top-4 -left-4 -z-10 w-24 h-24 rounded-full gradient-bg opacity-70"
               animate={{ 
                 scale: [1, 1.2, 1],
                 rotate: [0, -5, 0, 5, 0]
@@ -101,32 +87,24 @@ const About = () => {
           </motion.div>
         </div>
         
-        <motion.h3 
-          className="text-2xl font-semibold mt-16 mb-8 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          Parcours Sportif et Projets Futurs
-        </motion.h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-purple-700"
           >
-            <h4 className="text-xl font-semibold mb-3 text-black">Mon Parcours Sportif</h4>
-            <p className="text-gray-700 leading-relaxed">{sportBackground}</p>
-            <div className="mt-4 flex gap-2">
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Basketball</span>
-              <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">Boxe Anglaise</span>
-              <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">National 3</span>
-            </div>
+            <h3 className="text-2xl font-bold mb-4 text-black">Ce que je cherche</h3>
+            <ul className="space-y-3">
+              {lookingFor.map((item) => (
+                <li key={item} className="flex gap-3 text-gray-800 leading-relaxed">
+                  <span aria-hidden="true" className="mt-2.5 h-2 w-2 flex-none rounded-full gradient-bg" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
 
           <motion.div
@@ -135,18 +113,28 @@ const About = () => {
             whileInView="visible"
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-white p-6 md:p-8 rounded-xl shadow-lg"
           >
-            <h4 className="text-xl font-semibold mb-3 text-black">Mes Projets Futurs</h4>
-            <p className="text-gray-700 leading-relaxed">{futureProjects}</p>
-            <div className="mt-4 flex gap-2">
-              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Tolarys</span>
-              <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">AutoSoft</span>
-              <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">École d'Ingénieur</span>
+            <h3 className="text-2xl font-bold mb-4 text-black">Sport et vie étudiante</h3>
+            <p className="text-gray-700 leading-relaxed">{sport.basketball}</p>
+            <ul className="mt-4 space-y-2">
+              {sport.extras.map((item) => (
+                <li key={item} className="flex gap-3 text-gray-800">
+                  <span aria-hidden="true" className="mt-2 h-2 w-2 flex-none rounded-full bg-gray-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {sport.tags.map((tag, i) => (
+                <span key={tag} className={`px-3 py-1 rounded-full text-sm font-medium ${tagColors[i % tagColors.length]}`}>
+                  {tag}
+                </span>
+              ))}
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

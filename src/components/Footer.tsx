@@ -15,7 +15,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl font-bold gradient-text">Mattias Mathevon</h3>
+            <p className="text-xl font-bold gradient-text">Mattias Mathevon</p>
             <p className="text-sm text-gray-600 mt-1">Portfolio personnel</p>
           </motion.div>
           

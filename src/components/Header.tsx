@@ -24,7 +24,7 @@ const Header = () => {
     { name: 'Accueil', href: '/#home' },
     { name: 'À propos', href: '/#about' },
     { name: 'Expériences', href: '/#experience' },
-    { name: 'Projets', href: '/projets' },
+    { name: 'Projets', href: '/#projets' },
     { name: 'Compétences', href: '/#skills' },
     { name: 'Contact', href: '/#contact' },
   ];
@@ -44,10 +44,10 @@ const Header = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h1 className="text-2xl font-bold gradient-text">Mattias Mathevon</h1>
+          <a href="/#home" className="text-2xl font-bold gradient-text">Mattias Mathevon</a>
         </motion.div>
         
-        <nav className="hidden md:block">
+        <nav className="hidden md:block" aria-label="Navigation principale">
           <ul className="flex space-x-8">
             {navItems.map((item, index) => (
               <motion.li 
@@ -114,9 +114,12 @@ const MobileMenu = ({ navItems }: { navItems: { name: string; href: string }[] }
   return (
     <div>
       <button 
+        type="button"
         onClick={toggleMenu}
-        className="p-2 focus:outline-none"
-        aria-label="Toggle menu"
+        className="p-2"
+        aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+        aria-expanded={isOpen}
+        aria-controls="menu-mobile"
       >
         <motion.div
           animate={isOpen ? "open" : "closed"}
@@ -146,8 +149,11 @@ const MobileMenu = ({ navItems }: { navItems: { name: string; href: string }[] }
         </motion.div>
       </button>
       
-      <motion.div
-        className="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md shadow-lg mt-2 overflow-hidden"
+      <motion.nav
+        id="menu-mobile"
+        aria-label="Navigation principale"
+        inert={!isOpen}
+        className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg mt-2 overflow-hidden"
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={menuVariants}
@@ -171,7 +177,7 @@ const MobileMenu = ({ navItems }: { navItems: { name: string; href: string }[] }
             ))}
           </ul>
         </div>
-      </motion.div>
+      </motion.nav>
     </div>
   );
 };
