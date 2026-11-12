@@ -35,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className={`${geistSans.variable} antialiased`}>
+    <html lang="fr" className={geistSans.variable}>
+      <body className="antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

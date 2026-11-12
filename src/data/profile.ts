@@ -52,7 +52,7 @@ export const hero = {
 } as const;
 
 export const internship = {
-  sentence: "Je cherche un stage de 3 mois, du 17 mai au 16 août 2027, à Toulouse.",
+  sentence: "Je cherche un stage de 3\u00a0mois, du 17\u00a0mai au 16\u00a0août 2027, à Toulouse.",
   mailSubject: "Stage de 3 mois (mai à août 2027)",
 } as const;
 
@@ -62,7 +62,7 @@ export const about = [
 ] as const;
 
 export const lookingFor = [
-  "Un stage de 3 mois, du 17 mai au 16 août 2027, à Toulouse ou dans l'agglomération.",
+  "Un stage de 3\u00a0mois, du 17\u00a0mai au 16\u00a0août 2027, à Toulouse ou dans l'agglomération.",
   "Une équipe où quelqu'un de plus expérimenté relit mon code.",
   "Un produit qui touche au réel : aéro, spatial, énergie, robotique, climat.",
   "Petite ou grande structure, c'est la mission qui compte.",
