@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Consignes pour agents IA, régénérées par `next dev` (Next.js 16)
+/AGENTS.md

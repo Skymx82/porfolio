@@ -68,7 +68,7 @@ export default function CvPage() {
             width={1024}
             height={1024}
             sizes="96px"
-            priority
+            loading="eager"
             className="h-[24mm] w-[24mm] flex-none rounded-full object-cover"
           />
         </header>

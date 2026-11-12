@@ -56,7 +56,8 @@ export default function AutoSoftCaseStudy() {
             width={autosoft.images.planning.width}
             height={autosoft.images.planning.height}
             sizes="(min-width: 1024px) 1024px, 100vw"
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="h-auto w-full"
           />
           <figcaption className="bg-white px-4 py-3 text-sm text-gray-700">
