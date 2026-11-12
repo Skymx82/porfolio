@@ -73,15 +73,12 @@ export const sport = {
   // Texte d'origine conservé tel quel.
   basketball:
     "J'ai eu un parcours sportif riche dans le basketball, ayant évolué à haut niveau en National 3 avec JS Cugnaux. Avant cela, j'ai joué en U21 R1 à JS Cugnaux, en U21 R2 au Vazerac Sud Quercy Basket, et en U18 Occitanie au Montauban Basket Club.",
-  // En attente de confirmation (question n° 3) : texte d'origine inchangé.
-  boxing:
-    "Aujourd'hui, je pratique la boxe anglaise au Boxing Center, ce qui me permet de maintenir une discipline rigoureuse et de développer ma résistance mentale.",
   extras: [
     "Coach d'une équipe U11 (Vazerac Sud Quercy Basket, 2023-2024)",
     "Sport universitaire : HYROX",
     "Membre d'AMTC, le BDE de la MIAGE",
   ],
-  tags: ["Basketball", "National 3", "Boxe anglaise", "HYROX"],
+  tags: ["Basketball", "National 3", "Coaching", "HYROX"],
 } as const;
 
 export const experiences: Experience[] = [
