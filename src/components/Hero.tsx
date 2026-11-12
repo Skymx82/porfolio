@@ -3,20 +3,18 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TextPlugin } from 'gsap/TextPlugin';
 import MorphingSVG from './svg/MorphingSVG';
+import { hero, profile } from '@/data/profile';
+import { DownloadIcon, GitHubIcon, LinkedInIcon } from './icons';
 
 // Enregistrer les plugins GSAP
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 const Hero = () => {
   // Références pour les animations GSAP
   const heroSectionRef = useRef<HTMLElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
   const decorationRef = useRef<HTMLDivElement>(null);
   
   // Références pour les blobs
@@ -27,64 +25,9 @@ const Hero = () => {
   const particleElements = useRef<HTMLDivElement[]>([]);
   
   useEffect(() => {
-    // Créer une timeline principale
-    const mainTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    
-    // Animation simple du titre pour éviter les problèmes d'affichage
-    if (nameRef.current) {
-      // Animation plus simple et fiable
-      gsap.fromTo(
-        nameRef.current,
-        { 
-          opacity: 0, 
-          y: 30 
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power3.out"
-        }
-      );
-    }
-    
-    // Animation du sous-titre avec effet de machine à écrire
-    if (subtitleRef.current) {
-      const originalText = subtitleRef.current.textContent || "Développeur passionné & créatif";
-      subtitleRef.current.textContent = "";
-      
-      mainTl.to(subtitleRef.current, {
-        text: {
-          value: originalText,
-          delimiter: ""
-        },
-        duration: 1.5,
-        delay: 1.2,
-        ease: "none"
-      });
-    }
-    
-    // Animation du bouton
-    mainTl.fromTo(
-      buttonRef.current,
-      { 
-        scale: 0,
-        opacity: 0,
-        rotation: -15
-      },
-      { 
-        scale: 1,
-        opacity: 1,
-        rotation: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
-      },
-      "-=0.5"
-    );
-    
     // Animation de l'élément décoratif
     if (decorationRef.current) {
-      mainTl.fromTo(
+      gsap.fromTo(
         decorationRef.current,
         {
           scale: 0,
@@ -97,8 +40,7 @@ const Hero = () => {
           rotation: 0,
           duration: 1.2,
           ease: "elastic.out(1, 0.3)"
-        },
-        "-=0.7"
+        }
       );
       
       // Animation continue de l'élément décoratif
@@ -252,39 +194,53 @@ const Hero = () => {
       ></div>
       
       {/* Contenu principal */}
-      <div className="container mx-auto px-4 pt-20 pb-12 relative z-10">
-        <div className="flex flex-col items-center text-center">
-          <h1 
-            ref={nameRef}
-            className="text-5xl md:text-7xl font-bold mb-6 gradient-text"
-          >
-            Mattias Mathevon
+      <div className="container mx-auto px-4 pt-28 pb-16 relative z-10">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-base font-semibold uppercase tracking-[0.2em] text-gray-700">{profile.name}</p>
+          <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 text-balance">
+            {hero.title}
           </h1>
-          <p 
-            ref={subtitleRef}
-            className="text-xl md:text-2xl mb-8 max-w-2xl"
-          >
-            Fondateur de Tolarys & AutoSoft
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a 
-              ref={buttonRef}
-              href="#main-projects" 
-              className="px-8 py-3 rounded-full gradient-bg text-white font-medium transition-transform hover:scale-105 active:scale-95"
+          <p className="mt-6 text-lg md:text-xl text-gray-700 text-balance">{hero.subtitle.join(" · ")}</p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#autosoft"
+              className="px-7 py-3 rounded-full gradient-bg text-white font-semibold shadow-md transition-transform hover:scale-105 active:scale-95"
             >
-              Voir mes projets
+              Voir AutoSoft
             </a>
-            <a 
-              href="/CV.pdf" 
-              download
-              className="px-8 py-3 rounded-full bg-white border-2 border-gray-300 text-gray-800 font-medium transition-transform hover:scale-105 active:scale-95 hover:border-purple-500 flex items-center gap-2"
+            <a
+              href="#contact"
+              className="px-7 py-3 rounded-full bg-white border-2 border-gray-900 text-gray-900 font-semibold transition-transform hover:scale-105 active:scale-95"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
+              Me contacter
+            </a>
+            <a
+              href={profile.cvUrl}
+              download
+              className="px-7 py-3 rounded-full bg-white border-2 border-gray-300 text-gray-800 font-semibold transition-transform hover:scale-105 active:scale-95 hover:border-purple-600 flex items-center gap-2"
+            >
+              <DownloadIcon />
               Télécharger mon CV
+            </a>
+          </div>
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <a
+              href={profile.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn (nouvel onglet)"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-md ring-1 ring-gray-200 transition-colors hover:text-purple-700"
+            >
+              <LinkedInIcon />
+            </a>
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub (nouvel onglet)"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-md ring-1 ring-gray-200 transition-colors hover:text-purple-700"
+            >
+              <GitHubIcon />
             </a>
           </div>
         </div>
